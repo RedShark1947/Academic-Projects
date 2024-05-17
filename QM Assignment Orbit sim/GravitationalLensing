@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+# Constants
+G = 6.67430e-11 # Gravitational constant
+c = 3.0e8 # Speed of light
+# Mass of the lens (e.g., a galaxy)
+M = 1.0e11 # in solar masses
+M = M * 1.989e30 # convert to kg
+# Distance to the lens
+D = 1.5e22 # in meters (about 5 kiloparsecs)
+# Impact parameter
+b = 1.0e21 # in meters
+# Calculate the Einstein radius
+theta_E = np.sqrt((4 * G * M) / (c**2) * (1 / D))
+print(f"Einstein radius: {theta_E} rad")
+# Array of angles for the light rays
+theta = np.linspace(-5 * theta_E, 5 * theta_E, 1000)
+# Calculate deflection angles
+alpha = (4 * G * M) / (b * c**2) * (1 + (theta / theta_E)**2)**(-1)
+# Plot the results
+plt.figure(figsize=(8, 6))
+plt.plot(theta, alpha)
+plt.xlabel('Theta (rad)')
+plt.ylabel('Deflection (rad)')
+plt.title('Gravitational Lensing')
+plt.grid(True)
+plt.show()
